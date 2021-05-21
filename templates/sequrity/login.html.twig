@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Welcome to login page!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Welcome to login page!</h1>
+
+    Please type your login and password here:
+
+    {{ include('sequrity/_form.html.twig')}}
+
+    Don't have login? Please come <a href="{{ path('register') }}">here</a> to register!
+</div>
+{% endblock %}

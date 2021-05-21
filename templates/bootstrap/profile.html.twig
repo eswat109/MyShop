@@ -1,0 +1,29 @@
+{% extends 'bootbase.html.twig' %}
+
+{% block title %}Your profile{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="jumbotron jumbotron-fluid" >
+    <div class="container" style="max-width: 50%;">
+        <h1>Your profile: {{ guest.firstName}} {{ guest.secondName }}</h1>
+
+        Actions:
+        <br>
+    </div>
+    <div class="container" style="max-width: 30%;">
+        <ul class="list-group">
+            <li class="list-group-item"><a href="{{ path('index') }}">Back to shop</a></li>
+            <li class="list-group-item"><a href="{{ path('edit_profile') }}">Edit profile</a></li>
+            <li class="list-group-item"><a href="{{ path('my_whishlist') }}">My whishlist</a></li>
+            <li class="list-group-item"><a href="{{ path('my_cart') }}">My cart</a></li>
+            <li class="list-group-item"><a href="{{ path('my_orders') }}">My orders</a></li>
+            <li class="list-group-item"><a href="{{ path('logout') }}">Logout</a></li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

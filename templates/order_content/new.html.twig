@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New OrderContent{% endblock %}
+
+{% block body %}
+    <h1>Create new OrderContent</h1>
+
+    {{ include('order_content/_form.html.twig') }}
+
+    <a href="{{ path('order_content_index') }}">back to list</a>
+{% endblock %}

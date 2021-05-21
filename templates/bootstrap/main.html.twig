@@ -1,0 +1,38 @@
+{% extends 'bootbase.html.twig' %}
+
+{% block title %}Shop{% endblock %}
+
+{% block body %}
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1>Welcome to my shop!</h1>
+            <p>
+                In my shop I can offer some nice good products. Please, check list of products down here:
+            </p>
+        </div>
+        <div class="container">
+            <div class="card-columns">
+                {% for product in products %}
+                    <div class="card border-dark mb-3" style="width: 18rem;">
+                        <div class="card-header">
+                            Name: {{ product.name }}
+                        </div>
+                        <div class="card-body text-dark">
+                            <h5 class="card-title">Description: </h5>
+                            <p class="card-text">{{ product.description }}</p>
+                            <p class="card-text">Price: {{ product.price }}</p>
+                            <div class="btn-group">
+                                <a href="{{ path('add_to_cart', {'id': product.id}) }}" class="btn btn-primary">Add to cart</a>
+
+                                <a href="{{ path('add_to_whishlist', {'id': product.id}) }}" class="btn btn-info">Add to whishlist</a>
+
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div>no records found</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

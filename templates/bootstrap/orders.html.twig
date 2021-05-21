@@ -1,0 +1,54 @@
+{% extends 'bootbase.html.twig' %}
+
+{% block title %}Your orders{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-10">
+                <h1>Your orders, {{ guest.firstName}} {{ guest.secondName }}:</h1>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <ul class="list-group">
+            {% for order in orders %}
+                <li class="list-group-item">Order № {{ order.id }};<br>
+                    Ordered at: {{ order.orderAt|date('Y-m-d H:i:s') }};<br>
+                    Destination: {{ order.city }};<br>
+                    Status: {{ order.status }}<br>
+                    <div class="row justify-content-center">
+                        <div class="col-10">
+                            <div class="container" style="max-width: 100%;">
+                                <table class="table table-striped">
+                                    <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Product</th>
+                                        <th scope="col">Amount</th>
+                                        <th scope="col">Total price</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for orderContent in order.POrderContent %}
+                                        <tr>
+                                            <td>{{ orderContent.IdProduct }}</td>
+                                            <td>{{ orderContent.amount }}</td>
+                                            <td>{{ orderContent.IdProduct.price * orderContent.amount }}</td>
+                                        </tr>
+                                    {% else %}
+                                        <tr>
+                                            <td colspan="3">no records found</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <a href="{{ path('profile') }}" class="btn btn-link">Back to profile</a>
+    </div>
+{% endblock %}

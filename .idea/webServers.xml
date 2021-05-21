@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="77502328-31e4-4c2a-8b86-0505175e276f" name="do2">
+        <fileTransfer accessType="SFTP" host="192.168.0.13" port="22" sshConfigId="c104afba-c61d-4707-9cfe-45fc08c4c81e" sshConfig="toha@192.168.0.13:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="878b27d5-6408-4dac-8157-b6511a0b1fea" name="localm">
+        <fileTransfer accessType="SFTP" host="192.168.0.13" port="22" sshConfigId="c104afba-c61d-4707-9cfe-45fc08c4c81e" sshConfig="toha@192.168.0.13:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

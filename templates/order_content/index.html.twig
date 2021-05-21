@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}OrderContent index{% endblock %}
+
+{% block body %}
+    <h1>OrderContent index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Amount</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for order_content in order_contents %}
+            <tr>
+                <td>{{ order_content.id }}</td>
+                <td>{{ order_content.amount }}</td>
+                <td>
+                    <a href="{{ path('order_content_show', {'id': order_content.id}) }}">show</a>
+                    <a href="{{ path('order_content_edit', {'id': order_content.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('order_content_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Guest index{% endblock %}
+
+{% block body %}
+    <h1>Guest index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Login</th>
+                <th>Password</th>
+                <th>FirstName</th>
+                <th>SecondName</th>
+                <th>City</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for guest in guests %}
+            <tr>
+                <td>{{ guest.id }}</td>
+                <td>{{ guest.login }}</td>
+                <td>{{ guest.password }}</td>
+                <td>{{ guest.firstName }}</td>
+                <td>{{ guest.secondName }}</td>
+                <td>{{ guest.city }}</td>
+                <td>
+                    <a href="{{ path('guest_show', {'id': guest.id}) }}">show</a>
+                    <a href="{{ path('guest_edit', {'id': guest.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('guest_new') }}">Create new</a>
+{% endblock %}

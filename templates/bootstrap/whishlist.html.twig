@@ -1,0 +1,63 @@
+{% extends 'bootbase.html.twig' %}
+
+{% block title %}Your whishlist{% endblock %}
+
+{% block body %}
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-10">
+                    <h1>Your whishlist, {{ guest.firstName}} {{ guest.secondName }}:</h1>
+                    <p>
+                        You can add, remove and delete products from list down here:
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <div class="container" style="max-width: 80%;">
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Product name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for whishlist in whishlists %}
+                            <tr>
+                                <td>{{ whishlist.idproduct.name }}</td>
+                                <td>{{ whishlist.idproduct.price }}</td>
+                                <td>
+                                    <a href="{{ path('my_whishlist_remove', {'id': whishlist.id}) }}"class="btn btn-primary">Add to cart</a>
+                                    <a href="{{ path('my_whishlist_delete', {'id': whishlist.id}) }}"class="btn btn-primary">Delete</a>
+
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="4">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="btn-group">
+                        {% if carts is not empty%}
+                            <br><a href="{{ path('my_cart_make_order') }}" class="btn btn-primary">Order now</a>
+                        {% endif %}
+
+                        <br><a href="{{ path('profile') }}" class="btn btn-link">Back to profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

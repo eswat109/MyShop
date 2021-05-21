@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Whishlist{% endblock %}
+
+{% block body %}
+    <h1>Edit Whishlist</h1>
+
+    {{ include('whishlist/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('whishlist_index') }}">back to list</a>
+
+    {{ include('whishlist/_delete_form.html.twig') }}
+{% endblock %}

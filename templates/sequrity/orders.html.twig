@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Your orders{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Your orders, {{ guest.firstName}} {{ guest.secondName }}:</h1>
+
+    <ul>
+        {% for order in orders %}
+        <li>Order №{{ order.id }};<br>
+            Ordered at: {{ order.orderAt|date('Y-m-d H:i:s') }};<br>
+            Destination: {{ order.city }};<br>
+            Status: {{ order.status }}<br>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Amount</th>
+                    <th>Total price</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for orderContent in order.POrderContent %}
+                    <tr>
+                        <td>{{ orderContent.IdProduct }}</td>
+                        <td>{{ orderContent.amount }}</td>
+                        <td>{{ orderContent.IdProduct.price * orderContent.amount }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ path('profile') }}">back to profile</a>
+</div>
+{% endblock %}
