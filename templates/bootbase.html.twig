@@ -12,21 +12,22 @@
 </head>
 <body>
 {% block nav %}
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-between">
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark justify-content-between">
         <!-- Links -->
         <a class="navbar-brand" href="#">My Shop</a>
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('index') }}">Main page</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path(_path|default('login')) }}">Cabinet</a>
-            </li>
-        </ul>
-        <span class="navbar-text">
-          {{ message|default('FOOTER') }}
-        </span>
-
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('index') }}">Main page</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path(_path|default('login')) }}">Cabinet</a>
+                </li>
+            </ul>
+            <span class="navbar-text my-2 my-lg-0">
+              {{ message|default('') }}
+            </span>
+        </div>
     </nav>
 {% endblock %}
 {% block body %}

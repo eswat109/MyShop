@@ -34,11 +34,6 @@ class SequrityController extends AbstractController
         $guestRep = $this->getDoctrine()->getRepository(Guest::class);
         if (isset($_COOKIE['login']))
             $guest = $guestRep->findOneBy(['login' => $_COOKIE['login']]);
-        /*
-        if (!$guest){
-            return $this->redirectToRoute('login');
-        }
-        */
         return $guest;
     }
 
@@ -59,7 +54,7 @@ class SequrityController extends AbstractController
     /**
      * @Route("/add_to_cart/{id}", name="add_to_cart", methods={"GET"})
      */
-    public function add_to_cart(Product $product, CartRepository $cartRep)
+    public function addToCart(Product $product, CartRepository $cartRep)
     {
         $guest = $this->getGuest();
         if (!$this->isLoginCorrect())
@@ -88,7 +83,7 @@ class SequrityController extends AbstractController
     /**
      * @Route("/add_to_whishlist/{id}", name="add_to_whishlist", methods={"GET"})
      */
-    public function add_to_whishlist(Product $product, WhishlistRepository $whishlistRep)
+    public function addToWhishlist(Product $product, WhishlistRepository $whishlistRep)
     {
         $guest = $this->getGuest();
         if (!$this->isLoginCorrect())
@@ -125,7 +120,6 @@ class SequrityController extends AbstractController
             return $this->toLoginIfNot();
 
         $entityManager = $this->getDoctrine()->getManager();
-        //$guestCart = $guest->getPCart();
         $product = $whishlist->getIdProduct();
         $cart = $cartRep->findOneBy(array('id_guest' => $guest, 'id_product' => $product));
         if ($cart){
@@ -157,7 +151,6 @@ class SequrityController extends AbstractController
             return $this->toLoginIfNot();
 
         $entityManager = $this->getDoctrine()->getManager();
-        //$guestCart = $guest->getPCart();
         $guest->removePWhishlist($whishlist);
         $entityManager->flush();
 
@@ -194,16 +187,6 @@ class SequrityController extends AbstractController
         
         $form->handleRequest($request);
         $guestRep = $this->getDoctrine()->getRepository(Guest::class);
-
-        /*
-        if (isset($_COOKIE['login'])){
-            //setcookie('login', $_COOKIE['login'], time() + $this->COOKIE_TIME);
-            $guest = $guestRep->findOneBy(['login' => $_COOKIE['login']]);
-            if ($guest) {
-                return $this->redirectToRoute('profile');
-            }
-        }
-        */
         $login = $form->get('login')->getData();
         $password = $form->get('password')->getData();
 
@@ -218,7 +201,6 @@ class SequrityController extends AbstractController
             }
             else {
                 setcookie('login', $login, time() + $this->COOKIE_TIME);
-                //return $this->redirectToRoute('guest_index');
                 return $this->redirectToRoute('profile');
             }
         }
@@ -269,17 +251,7 @@ class SequrityController extends AbstractController
      */
     public function profile(GuestRepository $guestRep)
     {
-        /*
-        $guest = NULL;
-        if (isset($_COOKIE['login']))
-            $guest = $guestRep->findOneBy(['login' => $_COOKIE['login']]);
-        */
         $guest = $this->getGuest();
-        /*
-        if (!$guest){
-            return $this->redirectToRoute('login');
-        }
-        */
         if (!$this->isLoginCorrect())
             return $this->toLoginIfNot();
         return $this->render('bootstrap/profile.html.twig', [
@@ -291,7 +263,7 @@ class SequrityController extends AbstractController
     /**
      * @Route("/edit_profile", name="edit_profile", methods={"GET", "POST"})
      */
-    public function edit_profile(Request $request): Response
+    public function editProfile(Request $request): Response
     {
         $guest = $this->getGuest();
         if (!$this->isLoginCorrect())
@@ -342,7 +314,7 @@ class SequrityController extends AbstractController
     /**
      * @Route("/edit_profile/password", name="edit_password", methods={"POST"})
      */
-    public function edit_password(Request $request): Response
+    public function editPassword(Request $request): Response
     {
         $guest = $this->getGuest();
         if (!$this->isLoginCorrect())
@@ -417,7 +389,6 @@ class SequrityController extends AbstractController
             return $this->toLoginIfNot();
 
         $entityManager = $this->getDoctrine()->getManager();
-        //$guestCart = $guest->getPCart();
 
         $cart->setAmount($cart->getAmount()+1);
         $entityManager->flush();
@@ -435,7 +406,6 @@ class SequrityController extends AbstractController
             return $this->toLoginIfNot();
 
         $entityManager = $this->getDoctrine()->getManager();
-        //$guestCart = $guest->getPCart();
         if ($cart->getAmount() > 1) {
             $cart->setAmount($cart->getAmount() - 1);
             $entityManager->flush();
@@ -455,7 +425,6 @@ class SequrityController extends AbstractController
             return $this->toLoginIfNot();
 
         $entityManager = $this->getDoctrine()->getManager();
-        //$guestCart = $guest->getPCart();
         $guest->removePCart($cart);
         $entityManager->flush();
 
